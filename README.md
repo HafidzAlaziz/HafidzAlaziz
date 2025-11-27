@@ -37,6 +37,8 @@ Here are some ideas to get you started:
 
 <!-- <p align="left">Play games with me</p> -->
 
+<p align="left">Play games with me</p>
+
 ###
 
 <picture>
