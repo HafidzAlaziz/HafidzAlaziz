@@ -37,17 +37,7 @@ Here are some ideas to get you started:
 
 <!-- <p align="left">Play games with me</p> -->
 
-<p align="left">Play games with me</p>
 
-###
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/HafidzAlaziz/HafidzAlaziz/output/pacman-contribution-graph-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/HafidzAlaziz/HafidzAlaziz/output/pacman-contribution-graph.svg">
-  <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/HafidzAlaziz/HafidzAlaziz/output/pacman-contribution-graph.svg">
-</picture>
-
-###
 
 <img src="https://raw.githubusercontent.com/HafidzAlaziz/HafidzAlaziz/output/snake.svg" alt="Snake animation" />
 
