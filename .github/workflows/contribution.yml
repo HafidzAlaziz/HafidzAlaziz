@@ -13,11 +13,22 @@ jobs:
     permissions: 
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     
     steps:
-      # 1. Generate SNAKE
-      - name: generate github-contribution-grid-snake.svg
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create dist folder
+        run: mkdir -p dist
+
+      # 1. Jalankan PACMAN DULU (Agar tidak kena masalah permission)
+      - name: generate pacman.svg via curl
+        run: |
+          curl -L -o dist/pacman-contribution-graph.svg "https://github-readme-stats-fast.vercel.app/api?username=${{ github.repository_owner }}&theme=dark"
+
+      # 2. Jalankan SNAKE 
+      - name: generate snake.svg
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
@@ -25,13 +36,11 @@ jobs:
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
 
-      # 2. Generate PACMAN 
-      - name: generate pacman-contribution-graph
-        run: |
-          curl -o dist/pacman-contribution-graph.svg "https://github-readme-stats-fast.vercel.app/api?username=${{ github.repository_owner }}&theme=dark"
+      # 3. FIX PERMISSION (Penting: agar semua file bisa dibaca kembali)
+      - name: Fix permissions
+        run: sudo chown -R $USER:$USER dist
 
-
-      # 3. PUSH SEMUA FILE (Snake & Pacman) SEKALIGUS
+      # 4. PUSH SEMUA FILE SEKALIGUS
       - name: push updates to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
