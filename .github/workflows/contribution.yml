@@ -27,13 +27,9 @@ jobs:
 
       # 2. Generate PACMAN 
       - name: generate pacman-contribution-graph
-        uses: lowlighter/metrics@latest
-        with:
-          filename: dist/pacman-contribution-graph.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: half-year
+        run: |
+          curl -o dist/pacman-contribution-graph.svg "https://github-readme-stats-fast.vercel.app/api?username=${{ github.repository_owner }}&theme=dark"
+
 
       # 3. PUSH SEMUA FILE (Snake & Pacman) SEKALIGUS
       - name: push updates to output branch
