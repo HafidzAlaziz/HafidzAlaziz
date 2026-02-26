@@ -36,7 +36,7 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           filename: dist/pacman-contribution-graph.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.METRICS_TOKEN }}
           base: ""
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
