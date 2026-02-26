@@ -13,7 +13,7 @@ jobs:
     permissions: 
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     
     steps:
       - name: Checkout
@@ -31,15 +31,11 @@ jobs:
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
 
-      # 2. Generate PACMAN (Menggunakan Metrics yang Benar)
-      - name: generate pacman.svg
-        uses: lowlighter/metrics@latest
+      # 2. SEKARANG INI PACMAN YANG ASLI
+      - name: generate pacman-contribution-graph.svg
+        uses: abozanona/pacman-contribution-graph@main
         with:
-          filename: dist/pacman-contribution-graph.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: half-year
+          github_user_name: ${{ github.repository_owner }}
 
       # 3. FIX PERMISSION
       - name: Fix permissions
