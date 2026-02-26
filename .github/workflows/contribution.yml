@@ -13,7 +13,7 @@ jobs:
     permissions: 
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     
     steps:
       - name: Checkout
@@ -22,12 +22,7 @@ jobs:
       - name: Create dist folder
         run: mkdir -p dist
 
-      # 1. Jalankan PACMAN DULU (Agar tidak kena masalah permission)
-      - name: generate pacman.svg via curl
-        run: |
-          curl -L -o dist/pacman-contribution-graph.svg "https://github-readme-stats-fast.vercel.app/api?username=${{ github.repository_owner }}&theme=dark"
-
-      # 2. Jalankan SNAKE 
+      # 1. Generate SNAKE
       - name: generate snake.svg
         uses: Platane/snk@v3
         with:
@@ -36,7 +31,17 @@ jobs:
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
 
-      # 3. FIX PERMISSION (Penting: agar semua file bisa dibaca kembali)
+      # 2. Generate PACMAN (Menggunakan Metrics yang Benar)
+      - name: generate pacman.svg
+        uses: lowlighter/metrics@latest
+        with:
+          filename: dist/pacman-contribution-graph.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ""
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+
+      # 3. FIX PERMISSION
       - name: Fix permissions
         run: sudo chown -R $USER:$USER dist
 
